@@ -30,7 +30,8 @@
 
 🧩 System Architecture
 
-![image](https://github.com/user-attachments/assets/a4f0b3da-7cd8-475c-a910-bbaed79c64de)
+![image](https://github.com/user-attachments/assets/23876f55-9a5a-41ac-9596-97bf65177419)
+
 ------------
 
 ## 📦 Installation & Setup
