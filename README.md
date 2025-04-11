@@ -1,4 +1,4 @@
-# Team Volatile: NeuroPulse
+# Team Volatile: NeuroPulse 🧠❤️
 
 - Hello Team **Volatile** from **Bangalore Institute of Technology**,
 - Theme **"Improving healthcare through technology"** 
@@ -19,6 +19,36 @@
 ## Problem Statement
 
 > **An AI-powered 3D visualization system for EEG & ECG data of your heart & brain so that you get immediate alerts and recommendations detecting anomaly from your ECG, EEG data and the data from Google fit API, and the patient's past details.**
+
+---
+## 🛠 Tech Stack
+- Frontend: React.js, Three.Js
+- Backend: Flask + Python
+- Database: Supabase
+- AI: Gemini, ML models
+-------------
+
+🧩 System Architecture
+
+![image](https://github.com/user-attachments/assets/a4f0b3da-7cd8-475c-a910-bbaed79c64de)
+------------
+
+## 📦 Installation & Setup
+
+### Frontend (React.js)
+
+```bash
+npm install
+npm run dev
+```
+
+### Backend (Flask)
+
+```bash
+cd backend
+pip install -r requirements.txt
+python app.py
+```
 
 ---
 
