@@ -14,7 +14,7 @@ def extract_text_from_pdfs(file_paths):
                 for page in reader.pages:
                     all_text += page.extract_text() + "\n"
         except Exception as e:
-            print(f"❌ Error reading {path}: {e}")
+            print(f"Error reading {path}: {e}")
     return all_text
 
 # Function to analyze and summarize the medical content
@@ -22,7 +22,7 @@ def analyze_medical_reports(pdf_paths):
     extracted_text = extract_text_from_pdfs(pdf_paths)
 
     if not extracted_text.strip():
-        print("❌ No text found in the PDF(s).")
+        print("No text found in the PDF(s).")
         return
 
     prompt = f"""
@@ -55,7 +55,7 @@ def analyze_medical_reports(pdf_paths):
         print("❌ Error during analysis:")
         print(e)
 
-# 👇 Example usage
+# Example usage
 pdf_files = [
     r"C:\Users\shez8\Desktop\report1.pdf",
     r"C:\Users\shez8\Desktop\report2.pdf"
