@@ -1,25 +1,24 @@
-# Welcome Volatile 👋
+# Team Volatile: NeuroPulse
 
-Hello Team **Volatile** from **Bangalore Institute of Technology**,
-
-Welcome to the Hackathon! We're excited to have you on board and can't wait to see what you'll build under the theme **"Improving healthcare through technology"** 
+- Hello Team **Volatile** from **Bangalore Institute of Technology**,
+- Theme **"Improving healthcare through technology"** 
 
 ## Team Details
 
 - **Team Number:** 67  
 - **Team Name:** Volatile
-- **Team Leader:** Rajarshi Datta  
+- **Team Leader:** Rajarshi Datta (Backend & Designer)
 - **Email:** rayan05rio@gmail.com  
 - **Phone:** 9163148385  
 
 ### Team Members:
-- Ankit Sharma 
-- Rahil M 
-- Gautam Sharma 
+- Ankit Sharma (Frontend & Database)
+- Rahil M      (Backend)
+- Gautam Sharma (AI implementation)  
 
 ## Problem Statement
 
-> **An AI-powered 3D visualization system for EEG & ECG data of your heart & brain so that you get immed...**
+> **An AI-powered 3D visualization system for EEG & ECG data of your heart & brain so that you get immediate alerts and recommendations detecting anomaly from your ECG, EEG data and the data from Google fit API, and the patient's past details.**
 
 ---
 
