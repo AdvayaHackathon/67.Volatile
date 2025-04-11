@@ -1,4 +1,4 @@
-# Team Volatile: NeuroPulse 🧠❤️
+# Team Volatile: NeuroPulse 🧠🫀
 
 - Hello Team **Volatile** from **Bangalore Institute of Technology**,
 - Theme **"Improving healthcare through technology"** 
