@@ -57,8 +57,8 @@ def analyze_medical_reports(pdf_paths):
 
 # Example usage
 pdf_files = [
-    r"C:\Users\shez8\Desktop\report1.pdf",
-    r"C:\Users\shez8\Desktop\report2.pdf"
+    "report1.pdf",
+    "report2.pdf"
 ]
 
 analyze_medical_reports(pdf_files)
