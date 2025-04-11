@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useECGData } from '../hooks/useECGData';
 import { useEEGData } from '../hooks/useEEGData';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Brain, Heart, Dumbbell, Moon, Zap, Waves } from 'lucide-react';
+import { Brain, Heart, Activity, Dumbbell, Moon, Zap, Waves } from 'lucide-react';
 import HeartModel from './models/HeartModel';
 import BrainModel from './models/BrainModel';
 

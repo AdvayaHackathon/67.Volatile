@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import DigitalTwin from './DigitalTwin';
 import HealthAlerts from './HealthAlerts';
 import Recommendations from './Recommendations';
-import FuturePredictions from './FuturePredictions';
 import PatientDashboard from './PatientDashboard';
-import DocumentScanner from './DocumentScanner';
-import { Brain, Shield, AlertTriangle, Activity, UserCircle, MessageSquareHeart, LogOut, FileText } from 'lucide-react';
+import { Brain, Shield, AlertTriangle, Activity, UserCircle, MessageSquareHeart, LogOut, Coins, FileInput } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 const Dashboard = ({ session }) => {
@@ -18,6 +16,18 @@ const Dashboard = ({ session }) => {
 
   const handleConnect = () => {
     setIsConnected(true);
+  };
+
+  const openNeuroCareBot = () => {
+    window.open('https://neurocarebot.onrender.com/', '_blank');
+  };
+
+  const openTokenPage = () => {
+    window.open('https://v0-solidity-frontend-integration.vercel.app/token', '_blank');
+  };
+
+  const openStackBlitz = () => {
+    window.open('https://prescriptionsummariser.onrender.com', '_blank');
   };
 
   return (
@@ -36,6 +46,15 @@ const Dashboard = ({ session }) => {
               >
                 <Activity className="h-4 w-4" />
                 <span>Connect to Google Fit API</span>
+              </button>
+            )}
+            {isConnected && (
+              <button
+                onClick={openTokenPage}
+                className="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 rounded-lg flex items-center space-x-2"
+              >
+                <Coins className="h-4 w-4" />
+                <span>Token</span>
               </button>
             )}
             <button
@@ -81,18 +100,18 @@ const Dashboard = ({ session }) => {
               <Shield className="h-5 w-5 md:h-6 md:w-6" />
             </button>
             <button
-              className={`p-3 rounded-lg ${activeTab === 'predictions' ? 'bg-blue-600' : 'hover:bg-gray-700'}`}
-              onClick={() => setActiveTab('predictions')}
-              title="Future Predictions"
+              className="p-3 rounded-lg hover:bg-gray-700"
+              onClick={openNeuroCareBot}
+              title="NeuroCareBot"
             >
               <MessageSquareHeart className="h-5 w-5 md:h-6 md:w-6" />
             </button>
             <button
-              className={`p-3 rounded-lg ${activeTab === 'documents' ? 'bg-blue-600' : 'hover:bg-gray-700'}`}
-              onClick={() => setActiveTab('documents')}
-              title="Document Scanner"
+              className="p-3 rounded-lg hover:bg-gray-700"
+              onClick={openStackBlitz}
+              title="Open StackBlitz"
             >
-              <FileText className="h-5 w-5 md:h-6 md:w-6" />
+              <FileInput className="h-5 w-5 md:h-6 md:w-6" />
             </button>
           </div>
         </nav>
@@ -102,8 +121,6 @@ const Dashboard = ({ session }) => {
           {activeTab === 'twin' && <DigitalTwin isConnected={isConnected} />}
           {activeTab === 'alerts' && <HealthAlerts />}
           {activeTab === 'recommendations' && <Recommendations />}
-          {activeTab === 'predictions' && <FuturePredictions />}
-          {activeTab === 'documents' && <DocumentScanner />}
         </div>
       </main>
     </div>
