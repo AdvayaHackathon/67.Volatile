@@ -11,6 +11,13 @@
 - **Email:** rayan05rio@gmail.com  
 - **Phone:** 9163148385  
 
+## Features
+- Centralized Patient Dashboard: Vitals, History, Appointments
+- AI-based Emergency Alerts: Helps reduce risk of negligence with 3D support
+- Health Recommendations: Analyzing the anomaly data and suggesting immediate recommendations
+- Predictive AI Chatbot: Doctor/Patient Queries with time series forecasting
+
+
 ### Team Members:
 - Ankit Sharma (Frontend & Database)
 - Rahil M      (Backend)
