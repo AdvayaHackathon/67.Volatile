@@ -29,10 +29,10 @@ const DigitalTwin = ({ isConnected }) => {
   };
 
   // Mock data for initial display
-  const [mockData, setMockData] = useState<any[]>([]);
+  const [mockData, setMockData] = useState([]);
 
   // Generate data based on current state
-  const generateStateData = (time: number, state: string) => {
+  const generateStateData = (time, state) => {
     let ecgValue, eegValue;
 
     switch (state) {
@@ -114,9 +114,11 @@ const DigitalTwin = ({ isConnected }) => {
 
   return (
     <div className="h-full flex flex-col">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-        <div className="bg-gray-800 p-3 rounded-lg">
-          <div className="flex items-center justify-between mb-3">
+      <h2 className="text-2xl font-bold mb-6">Digital Twin Visualization</h2>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
+          <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold flex items-center">
               <Heart className="h-5 w-5 text-red-400 mr-2" />
               ECG Signal
@@ -124,28 +126,28 @@ const DigitalTwin = ({ isConnected }) => {
             {isConnected && (
               <div className="flex space-x-2">
                 <button
-                  className={`p-2 rounded ${heartState === 'gym' ? 'bg-green-600' : 'bg-gray-700 hover:bg-gray-600'}`}
+                  className={`p-2 rounded-md ${heartState === 'gym' ? 'bg-green-600' : 'bg-gray-700 hover:bg-gray-600'} transition-colors duration-200`}
                   onClick={() => setHeartState('gym')}
                   title="While doing gym"
                 >
                   <Dumbbell className="h-4 w-4" />
                 </button>
                 <button
-                  className={`p-2 rounded ${heartState === 'sleeping' ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'}`}
+                  className={`p-2 rounded-md ${heartState === 'sleeping' ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'} transition-colors duration-200`}
                   onClick={() => setHeartState('sleeping')}
                   title="Sleeping"
                 >
                   <Moon className="h-4 w-4" />
                 </button>
                 <button
-                  className={`p-2 rounded ${heartState === 'anxiety' ? 'bg-yellow-600' : 'bg-gray-700 hover:bg-gray-600'}`}
+                  className={`p-2 rounded-md ${heartState === 'anxiety' ? 'bg-yellow-600' : 'bg-gray-700 hover:bg-gray-600'} transition-colors duration-200`}
                   onClick={() => setHeartState('anxiety')}
                   title="Anxiety"
                 >
                   <Zap className="h-4 w-4" />
                 </button>
                 <button
-                  className={`p-2 rounded ${heartState === 'normal' ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'}`}
+                  className={`p-2 rounded-md ${heartState === 'normal' ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'} transition-colors duration-200`}
                   onClick={() => setHeartState('normal')}
                   title="Normal"
                 >
@@ -154,13 +156,17 @@ const DigitalTwin = ({ isConnected }) => {
               </div>
             )}
           </div>
-          <div className="h-40">
+          <div className="h-48 lg:h-56">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={mockData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#444" />
                 <XAxis dataKey="time" stroke="#888" />
                 <YAxis stroke="#888" />
-                <Tooltip contentStyle={{ backgroundColor: '#333', borderColor: '#555' }} />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: '#333', borderColor: '#555' }} 
+                  labelStyle={{ color: '#fff' }}
+                  formatter={(value) => [value.toFixed(3), 'Signal']}
+                />
                 <Legend />
                 <Line 
                   type="monotone" 
@@ -169,14 +175,21 @@ const DigitalTwin = ({ isConnected }) => {
                   dot={false} 
                   strokeWidth={2}
                   animationDuration={100}
+                  name="ECG Signal"
                 />
               </LineChart>
             </ResponsiveContainer>
           </div>
+          {isConnected && (
+            <div className="mt-3 text-sm text-gray-300 flex items-center">
+              <Activity className="h-4 w-4 mr-1 text-red-400" />
+              Heart Rate: <span className="font-semibold text-white ml-1">{heartRates[heartState]} BPM</span>
+            </div>
+          )}
         </div>
 
-        <div className="bg-gray-800 p-3 rounded-lg">
-          <div className="flex items-center justify-between mb-3">
+        <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
+          <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold flex items-center">
               <Brain className="h-5 w-5 text-blue-400 mr-2" />
               EEG Signal
@@ -184,14 +197,14 @@ const DigitalTwin = ({ isConnected }) => {
             {isConnected && (
               <div className="flex space-x-2">
                 <button
-                  className={`p-2 rounded ${brainState === 'tension' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-gray-600'}`}
+                  className={`p-2 rounded-md ${brainState === 'tension' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-gray-600'} transition-colors duration-200`}
                   onClick={() => setBrainState('tension')}
                   title="Mental Tension"
                 >
                   <Waves className="h-4 w-4" />
                 </button>
                 <button
-                  className={`p-2 rounded ${brainState === 'normal' ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'}`}
+                  className={`p-2 rounded-md ${brainState === 'normal' ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'} transition-colors duration-200`}
                   onClick={() => setBrainState('normal')}
                   title="Normal"
                 >
@@ -200,13 +213,17 @@ const DigitalTwin = ({ isConnected }) => {
               </div>
             )}
           </div>
-          <div className="h-40">
+          <div className="h-48 lg:h-56">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={mockData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#444" />
                 <XAxis dataKey="time" stroke="#888" />
                 <YAxis stroke="#888" />
-                <Tooltip contentStyle={{ backgroundColor: '#333', borderColor: '#555' }} />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: '#333', borderColor: '#555' }} 
+                  labelStyle={{ color: '#fff' }}
+                  formatter={(value) => [value.toFixed(3), 'Signal']}
+                />
                 <Legend />
                 <Line 
                   type="monotone" 
@@ -215,16 +232,23 @@ const DigitalTwin = ({ isConnected }) => {
                   dot={false} 
                   strokeWidth={2}
                   animationDuration={100}
+                  name="EEG Signal"
                 />
               </LineChart>
             </ResponsiveContainer>
           </div>
+          {isConnected && (
+            <div className="mt-3 text-sm text-gray-300 flex items-center">
+              <Waves className="h-4 w-4 mr-1 text-blue-400" />
+              Brain Activity: <span className="font-semibold text-white ml-1">{brainState.charAt(0).toUpperCase() + brainState.slice(1)}</span>
+            </div>
+          )}
         </div>
       </div>
 
-      <div className="bg-gray-800 p-4 rounded-lg flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="flex flex-col">
-          <div className="flex items-center justify-between mb-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
+        <div className="bg-gray-800 p-4 rounded-lg shadow-lg flex flex-col h-full">
+          <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold flex items-center">
               <Heart className="h-5 w-5 text-red-400 mr-2" />
               Heart Visualization
@@ -235,7 +259,7 @@ const DigitalTwin = ({ isConnected }) => {
               )}
             </h3>
           </div>
-          <div className="bg-gray-900 rounded-lg flex-1 overflow-hidden relative">
+          <div className="bg-gray-900 rounded-lg flex-1 overflow-hidden relative min-h-60 lg:min-h-80">
             <HeartModel heartRate={heartRates[heartState]} state={heartState} />
             
             <div className="absolute top-2 left-2 bg-gray-800 bg-opacity-70 p-2 rounded text-xs">
@@ -259,14 +283,14 @@ const DigitalTwin = ({ isConnected }) => {
           </div>
         </div>
         
-        <div className="flex flex-col">
-          <div className="flex items-center justify-between mb-2">
+        <div className="bg-gray-800 p-4 rounded-lg shadow-lg flex flex-col h-full">
+          <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold flex items-center">
               <Brain className="h-5 w-5 text-blue-400 mr-2" />
               Brain Visualization
             </h3>
           </div>
-          <div className="bg-gray-900 rounded-lg flex-1 overflow-hidden relative">
+          <div className="bg-gray-900 rounded-lg flex-1 overflow-hidden relative min-h-60 lg:min-h-80">
             <BrainModel activeRegions={brainStressRegions[brainState]} />
             
             <div className="absolute top-2 left-2 bg-gray-800 bg-opacity-70 p-2 rounded text-xs">
