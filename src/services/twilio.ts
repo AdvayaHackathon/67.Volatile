@@ -13,7 +13,7 @@ export const sendSOSMessage = async (toPhoneNumber: string, message: string) => 
       body: new URLSearchParams({
         To: `whatsapp:${toPhoneNumber}`,
         From: `whatsapp:${TWILIO_PHONE_NUMBER}`,
-        Body: 'Emergency alert! Gautam need help!'
+        Body: 'Emergency alert! User needs help!'
       })
     });
 

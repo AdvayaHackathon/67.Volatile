@@ -12,96 +12,151 @@ interface Recommendation {
   confidence: number;
 }
 
-const mockRecommendations: Recommendation[] = [
-  {
-    id: '1',
-    timestamp: new Date().toISOString(),
-    category: 'Cardiac',
-    title: 'Urgent: Blood Pressure Management',
-    description: 'Based on recent high blood pressure readings and irregular heart rhythm, immediate action is recommended.',
-    recommendations: [
-      'Take prescribed blood pressure medication immediately',
-      'Rest in a quiet, dark room for 30 minutes',
-      'Monitor blood pressure every 15 minutes',
-      'Contact emergency services if systolic pressure exceeds 180 mmHg',
-      'Avoid caffeine and stimulants'
-    ],
-    source: 'American Heart Association Guidelines 2025',
-    confidence: 0.92
-  },
-  {
-    id: '2',
-    timestamp: new Date(Date.now() - 1000 * 60 * 15).toISOString(),
-    category: 'Neurological',
-    title: 'Seizure Prevention Protocol',
-    description: 'Due to detected abnormal brain wave patterns, preventive measures are recommended.',
-    recommendations: [
-      'Take anti-epileptic medication as prescribed',
-      'Avoid bright, flashing lights',
-      'Ensure adequate sleep (7-8 hours)',
-      'Practice stress reduction techniques',
-      'Keep a seizure diary'
-    ],
-    source: 'Neurological Care Protocol 2025',
-    confidence: 0.85
-  },
-  {
-    id: '3',
-    timestamp: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
-    category: 'Combined',
-    title: 'Stress Management Plan',
-    description: 'Integrated approach to managing stress-related cardiovascular and neurological symptoms.',
-    recommendations: [
-      'Practice deep breathing exercises 3 times daily',
-      'Maintain regular sleep schedule',
-      'Engage in light physical activity',
-      'Follow Mediterranean diet guidelines',
-      'Schedule regular check-ups'
-    ],
-    source: 'Integrative Medicine Guidelines 2025',
-    confidence: 0.78
-  },
-  {
-    id: '4',
-    timestamp: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
-    category: 'Cardiac',
-    title: 'Heart Health Optimization',
-    description: 'Long-term cardiovascular health maintenance program.',
-    recommendations: [
-      'Continue daily aspirin regimen as prescribed',
-      'Monitor blood pressure twice daily',
-      'Limit sodium intake to <2000mg daily',
-      'Exercise 30 minutes, 5 days per week',
-      'Regular cardiology follow-up'
-    ],
-    source: 'Cardiovascular Health Protocol 2025',
-    confidence: 0.88
-  }
+// Mock recommendation sets for when LLM fails
+const mockRecommendationSets = [
+  [
+    {
+      id: '1',
+      timestamp: new Date().toISOString(),
+      category: 'Combined',
+      title: 'Urgent: Cardio-Neurological Risk Management',
+      description: 'Multiple high-risk indicators detected in both cardiac and neural patterns requiring immediate attention and intervention.',
+      recommendations: [
+        'Seek emergency medical attention immediately - Call emergency services or proceed to nearest ER',
+        'Take prescribed nitroglycerin if available and as directed by physician',
+        'Assume semi-reclined position to optimize cerebral blood flow',
+        'Monitor and record vital signs every 15 minutes if possible',
+        'Avoid any physical exertion or stress',
+        'Ensure clear airway and breathing',
+        'Have someone stay with you until medical help arrives'
+      ],
+      source: 'Emergency Cardiology & Neurology Protocols 2025',
+      confidence: 0.95
+    },
+    {
+      id: '2',
+      timestamp: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
+      category: 'Cardiac',
+      title: 'Arrhythmia Management Protocol',
+      description: 'Detected irregular heart rhythm patterns suggest need for immediate rhythm management intervention.',
+      recommendations: [
+        'Schedule urgent consultation with cardiac electrophysiologist',
+        'Continue current anti-arrhythmic medications as prescribed',
+        'Monitor pulse rate and rhythm every 2 hours',
+        'Maintain detailed log of palpitation episodes',
+        'Avoid caffeine and other stimulants',
+        'Practice guided breathing exercises (5-5-5 technique)',
+        'Ensure adequate electrolyte balance with prescribed supplements'
+      ],
+      source: 'Cardiac Rhythm Management Guidelines 2025',
+      confidence: 0.88
+    }
+  ],
+  [
+    {
+      id: '3',
+      timestamp: new Date().toISOString(),
+      category: 'Neurological',
+      title: 'Critical: Seizure Prevention Protocol',
+      description: 'Pre-seizure patterns detected requiring immediate preventive measures and safety preparations.',
+      recommendations: [
+        'Move to a safe area away from hazards',
+        'Take prescribed anti-epileptic medication if available',
+        'Activate seizure response device if equipped',
+        'Ensure someone is nearby for monitoring',
+        'Document time and duration of any episodes',
+        'Avoid bright lights and loud sounds',
+        'Maintain clear airway access'
+      ],
+      source: 'International Epilepsy Management Guidelines 2025',
+      confidence: 0.92
+    },
+    {
+      id: '4',
+      timestamp: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
+      category: 'Combined',
+      title: 'Stress-Related Health Management',
+      description: 'Detected patterns indicate significant stress impact on cardiovascular and neurological systems.',
+      recommendations: [
+        'Initiate prescribed anti-anxiety protocol if available',
+        'Practice progressive muscle relaxation technique',
+        'Monitor heart rate variability using provided device',
+        'Maintain regular deep breathing exercises',
+        'Consider temporary stress leave from work',
+        'Schedule follow-up with stress management specialist',
+        'Review and adjust current medications with physician'
+      ],
+      source: 'Integrated Stress Management Protocol 2025',
+      confidence: 0.85
+    }
+  ],
+  [
+    {
+      id: '5',
+      timestamp: new Date().toISOString(),
+      category: 'Cardiac',
+      title: 'Acute Coronary Syndrome Protocol',
+      description: 'ECG patterns indicate potential acute myocardial ischemia requiring immediate intervention.',
+      recommendations: [
+        'Call emergency services immediately (911/112)',
+        'Take aspirin 325mg if not contraindicated',
+        'Rest in semi-recumbent position',
+        'Prepare list of current medications',
+        'Have someone stay with you until EMS arrives',
+        'Avoid eating or drinking',
+        'Keep nitroglycerin readily accessible if prescribed'
+      ],
+      source: 'AHA Emergency Cardiac Care Guidelines 2025',
+      confidence: 0.94
+    },
+    {
+      id: '6',
+      timestamp: new Date(Date.now() - 1000 * 60 * 60).toISOString(),
+      category: 'Neurological',
+      title: 'Stroke Prevention Protocol',
+      description: 'Neural patterns suggest increased risk of cerebral ischemia requiring immediate preventive measures.',
+      recommendations: [
+        'Activate stroke response protocol immediately',
+        'Check blood pressure if monitoring equipment available',
+        'Document time of first symptoms',
+        'Perform FAST assessment (Face, Arms, Speech, Time)',
+        'Avoid food and drink until medical evaluation',
+        'Maintain upright or slightly reclined position',
+        'Prepare medical history for emergency responders'
+      ],
+      source: 'Stroke Prevention and Management Guidelines 2025',
+      confidence: 0.89
+    }
+  ]
 ];
 
 export const useRecommendations = () => {
   const { anomalies } = useAnomalies();
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [mockSetIndex, setMockSetIndex] = useState(0);
 
   const generateRecommendations = useCallback(async () => {
     try {
       setLoading(true);
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setRecommendations(mockRecommendations);
+      
+      // In a real application, we would use the LLM here
+      // For now, we'll use mock data sets
+      setRecommendations(mockRecommendationSets[mockSetIndex]);
+      
       setLoading(false);
     } catch (error) {
       console.error('Error generating recommendations:', error);
       setLoading(false);
     }
-  }, []);
+  }, [mockSetIndex]);
 
   useEffect(() => {
     generateRecommendations();
   }, [generateRecommendations]);
 
   const refresh = async () => {
+    setMockSetIndex((prevIndex) => (prevIndex + 1) % mockRecommendationSets.length);
     await generateRecommendations();
   };
 
