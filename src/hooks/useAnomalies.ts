@@ -229,6 +229,29 @@ const mockAnomalySets = [
         ]
       }]
     }
+  ],
+  [
+    {
+      id: '10',
+      timestamp: new Date().toISOString(),
+      type: 'EEG',
+      severity: 'high',
+      description: 'Severe Neural Dysregulation Detected',
+      details: 'Disorganized brain wave patterns with diffuse slowing and intermittent spike-wave discharges. Suggests encephalopathy or metabolic disturbance.',
+      status: 'active',
+      risks: [{
+        type: 'Encephalopathy',
+        probability: 0.83,
+        severity: 'high',
+        indicators: [
+          'Diffuse delta slowing',
+          'Lack of posterior dominant rhythm',
+          'Triphasic waves observed',
+          'Poor reactivity to stimuli',
+          'Frontal intermittent rhythmic delta activity (FIRDA)'
+        ]
+      }]
+    }
   ]
 ];
 
