@@ -11,6 +11,7 @@ model = genai.GenerativeModel(model_name="gemini-1.5-pro")
 
 # Sample patient data
 patient_profile = {
+    "name": "Rajarshi Datta",
     "age": 45,
     "gender": "Male",
     "weight": "82kg",
@@ -25,6 +26,7 @@ patient_profile = {
 def format_patient_data(profile):
     vitals = profile["recent_vitals"]
     return f"""
+Name: {profile['name']}
 Age: {profile['age']}
 Gender: {profile['gender']}
 Weight: {profile['weight']}

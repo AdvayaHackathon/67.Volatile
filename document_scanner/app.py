@@ -13,20 +13,23 @@ genai.configure(api_key=API_KEY)
 
 # Sample patient data (can be replaced with actual database)
 patient_profile = {
+    "name": "Rajarshi Datta",
     "age": 45,
     "gender": "Male",
     "weight": "82kg",
-    "known_conditions": ["Type 2 Diabetes", "Hypertension"],
+    "known_conditions": ["Type 2 Diabetes", "Hypertension","Family history of cardiovascular disease"],
     "recent_vitals": {
         "blood_pressure": "145/90",
         "glucose_level": "160 mg/dL",
         "heart_rate": "88 bpm"
+    },
+    "current_medications": ["Lisinopril", "Aspirin"]
     }
-}
 
 def format_patient_data(profile):
     vitals = profile["recent_vitals"]
     return f"""
+Name: {profile['name']}
 Age: {profile['age']}
 Gender: {profile['gender']}
 Weight: {profile['weight']}
@@ -35,6 +38,7 @@ Recent Vitals:
   - Blood Pressure: {vitals['blood_pressure']}
   - Glucose Level: {vitals['glucose_level']}
   - Heart Rate: {vitals['heart_rate']}
+Current Medications: {", ".join(profile['current_medications'])}
 """
 
 def generate_health_response(query):
@@ -49,6 +53,7 @@ def generate_health_response(query):
     2. Relevant health insights from the data
     3. Personalized recommendations if applicable
     4. Any necessary precautions or warnings
+    Format it in a human readable manner. In proper points. Dont add any * or any other formatting. The raw script will be displayed to the user.
     """
     try:
         model = genai.GenerativeModel(model_name="gemini-1.5-pro")
@@ -98,13 +103,14 @@ def analyze_medical_reports(extracted_text):
     --- START REPORT TEXT ---
     {extracted_text}
     --- END REPORT TEXT ---
-    Based on the report(s), provide a detailed but understandable summary for the patient including:
+    Based on the report(s), provide a concise but understandable summary for the patient including:
     1. What condition(s) they may have or are being tested for
     2. Likely causes or contributing factors
     3. Common medications or treatments and what they do
     4. Side effects the patient should watch out for
     5. Important precautions or advice they should follow
     Avoid technical jargon where possible. Be empathetic and clear.
+    Format it in a human readable manner. In proper points, break into separate paragraphs. Dont add any * or any other formatting. The raw script will be displayed to the user.After each point, add a new line.
     """
     
     try:

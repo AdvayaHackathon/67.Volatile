@@ -18,13 +18,13 @@ const PatientDashboard = ({ session }) => {
   const [editingMedications, setEditingMedications] = useState(false);
   
   const [patientInfo, setPatientInfo] = useState({
-    name: "John Doe",
+    name: "Rajarshi Datta",
     age: 45,
     gender: "Male",
     height: "180",
     weight: "75",
     bloodType: "O+",
-    conditions: ["Hypertension", "Family history of cardiovascular disease"]
+    conditions: ["Hypertension", "Family history of cardiovascular disease","Type 2 Diabetes"]
   });
 
   const [newCondition, setNewCondition] = useState("");
@@ -43,7 +43,7 @@ const PatientDashboard = ({ session }) => {
 
   const [vitals, setVitals] = useState({
     heartRate: "72",
-    bloodPressure: "120/80",
+    bloodPressure: "145/90",
     temperature: "36.6",
     oxygenSaturation: "98",
     respiratoryRate: "16"
