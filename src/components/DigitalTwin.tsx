@@ -6,7 +6,10 @@ import { Brain, Heart, Activity, Dumbbell, Moon, Zap, Waves } from 'lucide-react
 import HeartModel from './models/HeartModel';
 import BrainModel from './models/BrainModel';
 
-const DigitalTwin = ({ isConnected }) => {
+import { useOutletContext } from 'react-router-dom';
+
+const DigitalTwin = () => {
+  const { isConnected } = useOutletContext() || { isConnected: false };
   const { ecgData, ecgLoading } = useECGData();
   const { eegData, eegLoading } = useEEGData();
   const [heartState, setHeartState] = useState('normal');
@@ -123,7 +126,7 @@ const DigitalTwin = ({ isConnected }) => {
               <Heart className="h-5 w-5 text-red-400 mr-2" />
               ECG Signal
             </h3>
-            {isConnected && (
+            {/* {isConnected && (
               <div className="flex space-x-2">
                 <button
                   className={`p-2 rounded-md ${heartState === 'gym' ? 'bg-green-600' : 'bg-gray-700 hover:bg-gray-600'} transition-colors duration-200`}
@@ -154,7 +157,41 @@ const DigitalTwin = ({ isConnected }) => {
                   <Heart className="h-4 w-4" />
                 </button>
               </div>
-            )}
+            )} */}
+
+{isConnected && (
+  <div className="flex space-x-2">
+    <button
+      className={`p-2 rounded-md ${heartState === 'gym' ? 'bg-green-600' : 'bg-gray-700 hover:bg-gray-600'} transition-colors duration-200`}
+      onClick={() => setHeartState('gym')}
+      title="While doing gym"
+    >
+      <Dumbbell className="h-4 w-4" />
+    </button>
+    <button
+      className={`p-2 rounded-md ${heartState === 'sleeping' ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'} transition-colors duration-200`}
+      onClick={() => setHeartState('sleeping')}
+      title="Sleeping"
+    >
+      <Moon className="h-4 w-4" />
+    </button>
+    <button
+      className={`p-2 rounded-md ${heartState === 'anxiety' ? 'bg-yellow-600' : 'bg-gray-700 hover:bg-gray-600'} transition-colors duration-200`}
+      onClick={() => setHeartState('anxiety')}
+      title="Anxiety"
+    >
+      <Zap className="h-4 w-4" />
+    </button>
+    <button
+      className={`p-2 rounded-md ${heartState === 'normal' ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'} transition-colors duration-200`}
+      onClick={() => setHeartState('normal')}
+      title="Normal"
+    >
+      <Heart className="h-4 w-4" />
+    </button>
+  </div>
+)}
+
           </div>
           <div className="h-48 lg:h-56">
             <ResponsiveContainer width="100%" height="100%">
@@ -180,12 +217,32 @@ const DigitalTwin = ({ isConnected }) => {
               </LineChart>
             </ResponsiveContainer>
           </div>
-          {isConnected && (
+          {/* {isConnected && (
             <div className="mt-3 text-sm text-gray-300 flex items-center">
               <Activity className="h-4 w-4 mr-1 text-red-400" />
               Heart Rate: <span className="font-semibold text-white ml-1">{heartRates[heartState]} BPM</span>
             </div>
-          )}
+          )} */}
+
+{isConnected && (
+  <div className="flex space-x-2">
+    <button
+      className={`p-2 rounded-md ${brainState === 'tension' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-gray-600'} transition-colors duration-200`}
+      onClick={() => setBrainState('tension')}
+      title="Mental Tension"
+    >
+      <Waves className="h-4 w-4" />
+    </button>
+    <button
+      className={`p-2 rounded-md ${brainState === 'normal' ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'} transition-colors duration-200`}
+      onClick={() => setBrainState('normal')}
+      title="Normal"
+    >
+      <Brain className="h-4 w-4" />
+    </button>
+  </div>
+)}
+
         </div>
 
         <div className="bg-gray-800 p-4 rounded-lg shadow-lg">

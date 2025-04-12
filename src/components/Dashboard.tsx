@@ -157,6 +157,7 @@ const Dashboard = ({ session }) => {
                 className={`px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg flex items-center space-x-2 text-white`}
               >
                 <Activity className="h-4 w-4" />
+                
                 <span className="hidden sm:inline">Connect Google Fit</span>
               </button>
             )}
@@ -319,9 +320,9 @@ const Dashboard = ({ session }) => {
 
         {/* Main Content Area */}
         <div className={`flex-1 overflow-auto ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
-          <div className="p-4 md:p-6 max-w-7xl mx-auto">
-            <Outlet />
-          </div>
+        <div className="p-4 md:p-6 max-w-7xl mx-auto">
+  <Outlet context={{ isConnected }} />
+</div>
         </div>
       </main>
     </div>
