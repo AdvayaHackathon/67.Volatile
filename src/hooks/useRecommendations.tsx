@@ -140,9 +140,12 @@ export const useRecommendations = () => {
     try {
       setLoading(true);
       
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       // In a real application, we would use the LLM here
       // For now, we'll use mock data sets
-      setRecommendations(mockRecommendationSets[mockSetIndex]);
+      setRecommendations(mockRecommendationSets[mockSetIndex] as Recommendation[]);
       
       setLoading(false);
     } catch (error) {
@@ -156,6 +159,7 @@ export const useRecommendations = () => {
   }, [generateRecommendations]);
 
   const refresh = async () => {
+    setLoading(true);
     setMockSetIndex((prevIndex) => (prevIndex + 1) % mockRecommendationSets.length);
     await generateRecommendations();
   };
