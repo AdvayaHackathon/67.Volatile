@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import DigitalTwin from './DigitalTwin';
-import HealthAlerts from './HealthAlerts';
-import Recommendations from './Recommendations';
-import PatientDashboard from './PatientDashboard';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Brain, Shield, AlertTriangle, Activity, UserCircle, MessageSquareHeart, LogOut, Coins, FileInput } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 const Dashboard = ({ session }) => {
-  const [activeTab, setActiveTab] = useState('dashboard');
   const [isConnected, setIsConnected] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -19,7 +17,8 @@ const Dashboard = ({ session }) => {
   };
 
   const openNeuroCareBot = () => {
-    window.open('https://neurocarebot.onrender.com/', '_blank');
+    // Instead of opening in a new tab, navigate to the URL in the same tab
+    window.location.href = 'https://neurocarebot.onrender.com/';
   };
 
   const openTokenPage = () => {
@@ -27,7 +26,8 @@ const Dashboard = ({ session }) => {
   };
 
   const openStackBlitz = () => {
-    window.open('https://prescriptionsummariser.onrender.com', '_blank');
+    // Instead of opening in a new tab, navigate to the URL in the same tab
+    window.location.href = 'https://prescriptionsummariser.onrender.com';
   };
 
   return (
@@ -71,34 +71,34 @@ const Dashboard = ({ session }) => {
       <main className="flex-1 overflow-hidden flex">
         <nav className="w-16 bg-gray-800 border-r border-gray-700 md:w-20">
           <div className="flex flex-col items-center py-4 space-y-6">
-            <button
-              className={`p-3 rounded-lg ${activeTab === 'dashboard' ? 'bg-blue-600' : 'hover:bg-gray-700'}`}
-              onClick={() => setActiveTab('dashboard')}
+            <Link
+              to="/"
+              className={`p-3 rounded-lg ${location.pathname === '/' ? 'bg-blue-600' : 'hover:bg-gray-700'}`}
               title="Patient Dashboard"
             >
               <UserCircle className="h-5 w-5 md:h-6 md:w-6" />
-            </button>
-            <button
-              className={`p-3 rounded-lg ${activeTab === 'twin' ? 'bg-blue-600' : 'hover:bg-gray-700'}`}
-              onClick={() => setActiveTab('twin')}
+            </Link>
+            <Link
+              to="/twin"
+              className={`p-3 rounded-lg ${location.pathname === '/twin' ? 'bg-blue-600' : 'hover:bg-gray-700'}`}
               title="Digital Twin"
             >
               <Activity className="h-5 w-5 md:h-6 md:w-6" />
-            </button>
-            <button
-              className={`p-3 rounded-lg ${activeTab === 'alerts' ? 'bg-blue-600' : 'hover:bg-gray-700'}`}
-              onClick={() => setActiveTab('alerts')}
+            </Link>
+            <Link
+              to="/alerts"
+              className={`p-3 rounded-lg ${location.pathname === '/alerts' ? 'bg-blue-600' : 'hover:bg-gray-700'}`}
               title="Health Alerts"
             >
               <AlertTriangle className="h-5 w-5 md:h-6 md:w-6" />
-            </button>
-            <button
-              className={`p-3 rounded-lg ${activeTab === 'recommendations' ? 'bg-blue-600' : 'hover:bg-gray-700'}`}
-              onClick={() => setActiveTab('recommendations')}
+            </Link>
+            <Link
+              to="/recommendations"
+              className={`p-3 rounded-lg ${location.pathname === '/recommendations' ? 'bg-blue-600' : 'hover:bg-gray-700'}`}
               title="Recommendations"
             >
               <Shield className="h-5 w-5 md:h-6 md:w-6" />
-            </button>
+            </Link>
             <button
               className="p-3 rounded-lg hover:bg-gray-700"
               onClick={openNeuroCareBot}
@@ -117,10 +117,7 @@ const Dashboard = ({ session }) => {
         </nav>
 
         <div className="flex-1 overflow-auto p-4 md:p-6">
-          {activeTab === 'dashboard' && <PatientDashboard session={session} />}
-          {activeTab === 'twin' && <DigitalTwin isConnected={isConnected} />}
-          {activeTab === 'alerts' && <HealthAlerts />}
-          {activeTab === 'recommendations' && <Recommendations />}
+          <Outlet />
         </div>
       </main>
     </div>
